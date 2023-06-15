@@ -1,10 +1,22 @@
-import sqlite3
-from pathlib import Path
+import pymysql
+import functions
+connection = pymysql.connect(
 
+    host='localhost',
+    user='root',
+    password='0910',
+    database='reservas_Hotel'
 
-
-connection = sqlite3.connect('reservasHotel.db')
+)
 cursor = connection.cursor()
 
+functions.titulo('Reservas')
+print("""
+[1]Imformações quartos 
+[2]clientes """)
 
-pessoa = str(input("Por favor imforme seu nome: "))
+#SQL
+cursor.close()
+connection.close()
+
+
