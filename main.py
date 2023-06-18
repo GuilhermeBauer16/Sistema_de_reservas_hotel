@@ -38,11 +38,10 @@ while True:
 
     if opção == 1:
         functions.titulo('Nova reserva')
-        nome_completo = str(input('Imforme seu nome completo: ')).upper()
+        nome_completo = str(input('Imforme seu nome completo: ')).upper() # 1- quarto 2-valor do quarto
         quarto, valor = functions.quartos() 
-        print(quarto)
-        print(valor)
-
+        dias = functions.conversor_numero('Quantos dias você ira permanecer no quarto: ',int)
+        soma = valor * dias 
 
     elif opção == 2:
         while True:
