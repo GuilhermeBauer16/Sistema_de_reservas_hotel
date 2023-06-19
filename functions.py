@@ -5,7 +5,6 @@ def titulo(msg, quant=40):
     print(f'{msg:^{quantia}}')
     print('=' * quantia)
 
-
 def conversor_numero(msg,tipo = int):
 
     while True:

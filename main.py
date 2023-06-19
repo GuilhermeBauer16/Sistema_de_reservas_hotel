@@ -9,25 +9,22 @@ connection = pymysql.connect(
     database='reservas_hotel'
 
 )
+
 cursor = connection.cursor()
-# try :
-#     create_table_query = '''
-#     CREATE TABLE reservas (
-#         id INT NOT NULL AUTO_INCREMENT,
-#         usuario INT NOT NULL,
-#         PRIMARY KEY (id)
-#     )
-#     '''
-#     cursor.execute(create_table_query)
-#     print('Tabela "reservas" criada com sucesso.') 
+# cursor.execute('DROP TABLE reservas ')
 
+def mostrar():
+    cursor.execute('''SELECT table_name FROM information_schema.tables WHERE table_schema = "reservas_hotel"
+    ''')
+    tabelas  = cursor.fetchall()
 
-# except pymysql.Error as erro:
-#     print(f'erro {erro}')
+    for tabela in tabelas:
+        print(tabela[0])
 
+mostrar()
 escolha = ''
 quarto = ''
-valor = ''
+diaria = ''
 while True:
     functions.titulo('Reservas do Hotel Bauer ')
     print("""
@@ -38,19 +35,43 @@ while True:
 
     if opção == 1:
         functions.titulo('Nova reserva')
-        nome_completo = str(input('Imforme seu nome completo: ')).upper() # 1- quarto 2-valor do quarto
-        quarto, valor = functions.quartos() 
+        nome_completo = str(input('Imforme seu nome completo: ')).upper().replace(' ','_') # 1- quarto 2-valor do quarto
+        quarto, diaria = functions.quartos() 
         dias = functions.conversor_numero('Quantos dias você ira permanecer no quarto: ',int)
-        soma = valor * dias 
+        total = diaria * dias 
+
+        try: 
+            usuario = f'''CREATE TABLE IF NOT EXISTS {nome_completo}(
+                        Nome VARCHAR(255) ,
+                        quarto VARCHAR(255) ,
+                        dias TINYINT, 
+                        soma FLOAT )'''
+            
+            cursor.execute(usuario)
+
+            cadastro = f'''
+            INSERT INTO {nome_completo}(
+            nome , quarto , dias , soma ) 
+            VALUES (%s , %s , %s , %s )'''
+
+            valores = (nome_completo, quarto , dias , total )
+            cursor.execute(cadastro,valores)
+            connection.commit()
+            print(f'Usuario {nome_completo.replace('_', ' ')} cadrastado com sucesso')
+
+        except pymysql.Error as erro:
+            print(f'erro {erro}')
 
     elif opção == 2:
         while True:
-            functions.titulo('Usuarios', )
+            functions.titulo('Usuarios' , 80 )
+        
         
     
     break
 
 #SQL
+
 cursor.close()
 connection.close()
 
