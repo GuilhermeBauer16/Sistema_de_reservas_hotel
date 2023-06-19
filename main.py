@@ -9,9 +9,9 @@ connection = pymysql.connect(
     database='reservas_hotel'
 
 )
-
+ 
 cursor = connection.cursor()
-# cursor.execute('DROP TABLE reservas ')
+# cursor.execute('DROP TABLE trhyrthrh')
 
 def mostrar():
     cursor.execute('''SELECT table_name FROM information_schema.tables WHERE table_schema = "reservas_hotel"
@@ -21,7 +21,7 @@ def mostrar():
     for tabela in tabelas:
         print(tabela[0])
 
-mostrar()
+
 escolha = ''
 quarto = ''
 diaria = ''
@@ -63,9 +63,19 @@ while True:
             print(f'erro {erro}')
 
     elif opção == 2:
+        mostrar() 
         while True:
             functions.titulo('Usuarios' , 80 )
-        
+            nome_reserva = str(input('Imforme seu nome completo para convefir sua reserva: ')).upper().replace(' ','_')
+            cursor.execute(f'SELECT * FROM {nome_reserva}')
+            reservas = cursor.fetchall()
+            functions.titulo(f'{nome_reserva.replace("_", " ")}')
+            for reserva in reservas:
+                print(f'Nome: {reserva[0].replace("_", " ")}')
+                print(f'Quarto: {reserva[1]}')
+                print(f'dias: {reserva[2]}')
+                print(f'R$: {reserva[3]}')
+            print('=' * 80)
         
     
     break
