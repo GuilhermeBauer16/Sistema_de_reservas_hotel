@@ -31,4 +31,6 @@ e com o valor da sua diaria.
 * Já possue reserva : está função é para o usuario que já possue reserva , mostrando seus dados como: nome , quarto
   quantos dias e o valor R$.
 
-  * Editar sua reserva : 
+* Editar sua reserva : Funcionalidade de editar a sua reserva.
+
+* Deletar: Funcionalidade de deletar a sua reserva. 
