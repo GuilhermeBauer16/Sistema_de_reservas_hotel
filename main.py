@@ -10,7 +10,7 @@ connection = pymysql.connect(
     database='reservas_hotel'
 
 )
-
+nome_reserva = ''
 banco = """CREATE DATABASE IF NOT EXISTS reservas_hotel 
             DEFAULT CHARACTER SET utf8 
             DEFAULT COLLATE utf8_general_ci """
@@ -24,6 +24,29 @@ def mostrar():
 
     for tabela in tabelas:
         print(tabela[0])
+
+def autentica_usuario():
+    global nome_reserva
+    while True:
+        functions.titulo('Usuarios' , 40 )
+        nome_reserva = str(input('Imforme seu nome completo para conferir sua reserva: ')).upper().replace(' ','_')
+        cursor.execute(f'SHOW TABLES LIKE "{nome_reserva.replace(' ', '_').upper()}"')
+        resultado = cursor.fetchone()
+        if resultado:
+            cursor.execute(f'SELECT * FROM {nome_reserva}')
+            reservas = cursor.fetchall()
+            functions.titulo(f'{nome_reserva.replace("_", " ")}')
+            for reserva in reservas:
+                print(f'Nome: {reserva[1].replace("_", " ")}')
+                print(f'Quarto: {reserva[2]}')
+                print(f'dias: {reserva[3]}')
+                print(f'R$: {reserva[4]}')
+            print('=' * 80)
+            break
+        
+
+        else: 
+            print('\033[31mNão possue usuario cadastrado neste nome\033[m')
 
 
 escolha = ''
@@ -40,8 +63,7 @@ while True:
 
     if opção == 1:
         functions.titulo('Nova reserva',40)
-        nome_completo = str(input('Imforme seu nome completo: '))
-        nome_completo.upper().replace(' ','_') 
+        nome_completo = str(input('Imforme seu nome completo: ')).upper().replace(' ','_') 
         quarto, diaria = functions.quartos() 
         dias = functions.conversor_numero('Quantos dias você ira permanecer no quarto: ',int)# 1- quarto 2-valor do quarto
         total = diaria * dias 
@@ -73,26 +95,33 @@ while True:
             print(f'erro {erro}')
 
     elif opção == 2:
-        mostrar() 
         while True:
-            functions.titulo('Usuarios' , 40 )
-            nome_reserva = str(input('Imforme seu nome completo para conferir sua reserva: ')).upper().replace(' ','_')
-            cursor.execute(f'SHOW TABLES LIKE "{nome_reserva.replace(' ', '_').upper()}"')
-            resultado = cursor.fetchone()
-            if resultado:
-                cursor.execute(f'SELECT * FROM {nome_reserva}')
-                reservas = cursor.fetchall()
-                functions.titulo(f'{nome_reserva.replace("_", " ")}')
-                for reserva in reservas:
-                    print(f'Nome: {reserva[1].replace("_", " ")}')
-                    print(f'Quarto: {reserva[2]}')
-                    print(f'dias: {reserva[3]}')
-                    print(f'R$: {reserva[4]}')
-                print('=' * 80)
+            mostrar()
+            autentica_usuario() 
+            functions.titulo('Funções Adicionais')
+            print('''
+[1]Editar reserva
+[2]Deletar reserva
+[3]Voltar ao menu
+''')
+            opção_reserva = functions.conversor_numero('Sua opção: ', int)
+            print('=' * 80)
+            if opção_reserva == 1:
+                # novo_quarto, nova_diaria = functions.quartos() 
+                # novo_dias = functions.conversor_numero('Quantos dias você ira permanecer no quarto: ',int)# 1- quarto 2-valor do quarto
+                # novo_total = nova_diaria * novo_dias 
 
-            else: 
-                print('\033[31mNão possue usuario cadastrado neste nome\033[m')
-
+                # cursor.execute(f"""
+                #                UPDATE {nome_reserva} SET quarto = %s , dias= %s ,
+                #                soma = %s """)
+                ...
+            elif opção_reserva == 2:
+                cursor.execute(f'DROP TABLE {nome_reserva} ')
+                print(f'reserva no nome de {nome_reserva.replace('_',' ')} deletada')
+            elif opção_reserva == 3: 
+                print('Voltando para o menu')
+                sleep(1)
+                break
 
     elif opção == 3:
         print('saindo...')
