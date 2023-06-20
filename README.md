@@ -28,8 +28,11 @@ Desenvolvemos um CRUD (Create, Read, Update, Delete) com as funcionalidades do M
 e com o valor da sua diaria.
      * dias : Imforme quando dias você estará no hotel.
 
-* Já possue reserva : está função é para o usuario que já possue reserva , mostrando seus dados como: nome , quarto
-  quantos dias e o valor R$.
+* Já possue reserva : está função é para o usuario que já possue reserva , mostrando seus dados como:
+  * Nome
+  * Quarto
+  * Quantos dias  de estadia
+  * Valor R$.
 
 * Editar sua reserva : Funcionalidade de editar a sua reserva.
 
