@@ -1,4 +1,14 @@
 from time import sleep
+import os
+
+def limpa_terminal():
+    if os.name == 'nt':
+        os.system('cls')
+
+    else:
+        os.system('clear')
+
+        
 def titulo(msg, quant=40):
     quantia = quant * 2
     print('=' * quantia)

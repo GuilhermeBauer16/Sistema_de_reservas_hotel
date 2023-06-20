@@ -11,19 +11,15 @@ connection = pymysql.connect(
 
 )
 nome_reserva = ''
+escolha = ''
+quarto = ''
+diaria = ''
 banco = """CREATE DATABASE IF NOT EXISTS reservas_hotel 
             DEFAULT CHARACTER SET utf8 
             DEFAULT COLLATE utf8_general_ci """
-cursor = connection.cursor()
-# cursor.execute('DROP TABLE trhyrthrh')
-cursor.execute(banco)
-def mostrar():
-    cursor.execute('''SELECT table_name FROM information_schema.tables WHERE table_schema = "reservas_hotel"
-    ''')
-    tabelas  = cursor.fetchall()
 
-    for tabela in tabelas:
-        print(tabela[0])
+cursor = connection.cursor()
+cursor.execute(banco)
 
 def autentica_usuario():
     global nome_reserva
@@ -49,9 +45,7 @@ def autentica_usuario():
             print('\033[31mNão possue usuario cadastrado neste nome\033[m')
 
 
-escolha = ''
-quarto = ''
-diaria = ''
+
 while True:
     functions.titulo('Reservas do Hotel Bauer ')
     print("""
@@ -93,10 +87,12 @@ while True:
         except pymysql.Error as erro:
             print('\033[31mJa possue um usuario cadastrado neste nome\033[m')
             print(f'erro {erro}')
+        sleep(2)
+        functions.limpa_terminal()
 
     elif opção == 2:
         while True:
-            mostrar()
+
             autentica_usuario() 
             functions.titulo('Funções Adicionais')
             print('''
@@ -104,23 +100,38 @@ while True:
 [2]Deletar reserva
 [3]Voltar ao menu
 ''')
+            print('=' * 80)
             opção_reserva = functions.conversor_numero('Sua opção: ', int)
             print('=' * 80)
             if opção_reserva == 1:
-                # novo_quarto, nova_diaria = functions.quartos() 
-                # novo_dias = functions.conversor_numero('Quantos dias você ira permanecer no quarto: ',int)# 1- quarto 2-valor do quarto
-                # novo_total = nova_diaria * novo_dias 
 
-                # cursor.execute(f"""
-                #                UPDATE {nome_reserva} SET quarto = %s , dias= %s ,
-                #                soma = %s """)
-                ...
+                novo_quarto, nova_diaria = functions.quartos() 
+                novo_dias = functions.conversor_numero('Quantos dias você ira permanecer no quarto: ',int)# 1- quarto 2-valor do quarto
+                novo_total = nova_diaria * novo_dias 
+
+                update =  (f"""
+                               UPDATE {nome_reserva} SET quarto = %s , dias= %s ,
+                               soma = %s WHERE nome = %s  """)
+                
+                valores_atualizados = (novo_quarto , novo_dias , novo_total , nome_reserva)
+                cursor.execute(update,valores_atualizados)
+                connection.commit()
+                print(f'\033[32m{nome_reserva.replace('_' , ' ')} sua reserva foi alterada com sucesso\033[m ')
+                sleep(1.5)
+                functions.limpa_terminal()
+
             elif opção_reserva == 2:
+
                 cursor.execute(f'DROP TABLE {nome_reserva} ')
-                print(f'reserva no nome de {nome_reserva.replace('_',' ')} deletada')
+                print(f'\033[32mreserva no nome de {nome_reserva.replace('_',' ')} deletada\033[m')
+                sleep(1.5)
+                functions.limpa_terminal()
+
             elif opção_reserva == 3: 
+
                 print('Voltando para o menu')
-                sleep(1)
+                sleep(1.5)
+                functions.limpa_terminal()
                 break
 
     elif opção == 3:
