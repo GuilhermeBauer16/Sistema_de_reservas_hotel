@@ -12,3 +12,9 @@ podendo registrar, verificar a situação e também excluir sua reserva.
 
 https://github.com/GuilhermeBauer16/Sistema_de_resesvas_hotel/assets/123701893/e9c1ac44-9bff-4f92-920d-8b9381547587
 
+## Aprendizado 
+
+
+Este projeto teve como aprendizado a utilização do banco de dados MySQL e do Workbench,
+aprendendo a sintaxe baseada em SQL e como estabelecer conexão com o Workbench.
+Desenvolvemos um CRUD (Create, Read, Update, Delete) com as funcionalidades do MySQL.
