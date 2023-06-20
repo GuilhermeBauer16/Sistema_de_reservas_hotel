@@ -24,19 +24,20 @@ Desenvolvemos um CRUD (Create, Read, Update, Delete) com as funcionalidades do M
 * Nova reserva : O com essa função o usuario poderar realizar suas reservas divididas entre :
 
      * Nome completo : Imforme seu nome completo
-     * quarto : Imforme o quarto de sua preferência , cada um com suas especificações definidas
-e com o valor da sua diaria.
-     * dias : Imforme quando dias você estará no hotel.
+     * Quarto: Informe o quarto de sua preferência, cada um com suas especificações definidas
+e com o valor da sua diária.
+     * Dias: Informe quantos dias você estará no hotel.
 
-* Já possue reserva : está função é para o usuario que já possue reserva , mostrando seus dados como:
+* Já possui reserva: Esta função destina-se aos usuários que já possuem reserva, mostrando seus dados como:
   * Nome
   * Quarto
-  * Quantos dias  de estadia
+  * Quantos dias de estadia
   * Valor R$.
 
 * Editar sua reserva : Funcionalidade de editar a sua reserva.
 
-* Deletar: Funcionalidade de deletar a sua reserva. 
+* Deletar: Funcionalidade de deletar a sua reserva.
+ 
 ## Necessário para a funcionalidade do projeto
 
 Para o funcionamento do projeto, você precisará instalar a biblioteca pymysql através do pip.
