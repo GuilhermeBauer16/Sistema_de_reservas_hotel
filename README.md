@@ -18,3 +18,17 @@ https://github.com/GuilhermeBauer16/Sistema_de_resesvas_hotel/assets/123701893/e
 Este projeto teve como aprendizado a utilização do banco de dados MySQL e do Workbench,
 aprendendo a sintaxe baseada em SQL e como estabelecer conexão com o Workbench.
 Desenvolvemos um CRUD (Create, Read, Update, Delete) com as funcionalidades do MySQL.
+
+## Funcionalidades 
+
+* Nova reserva : O com essa função o usuario poderar realizar suas reservas divididas entre :
+
+     * Nome completo : Imforme seu nome completo
+     * quarto : Imforme o quarto de sua preferência , cada um com suas especificações definidas
+e com o valor da sua diaria.
+     * dias : Imforme quando dias você estará no hotel.
+
+* Já possue reserva : está função é para o usuario que já possue reserva , mostrando seus dados como: nome , quarto
+  quantos dias e o valor R$.
+
+  * Editar sua reserva : 
