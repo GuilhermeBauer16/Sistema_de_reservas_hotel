@@ -34,3 +34,16 @@ e com o valor da sua diaria.
 * Editar sua reserva : Funcionalidade de editar a sua reserva.
 
 * Deletar: Funcionalidade de deletar a sua reserva. 
+## Necessário para a funcionalidade do projeto
+
+Para o funcionamento do projeto, você precisará instalar a biblioteca pymysql através do pip.
+Você pode fazer isso no terminal da sua IDE ou do sistema operacional executando o seguinte comando
+
+pip install pymysql
+
+![image](https://github.com/GuilhermeBauer16/Sistema_de_resesvas_hotel/assets/123701893/0bd9cde5-8354-4791-bc1d-128441e7dfbd)
+
+
+## Autor 
+
+  https://www.linkedin.com/in/guilherme-bauer-desemvolvedor/
