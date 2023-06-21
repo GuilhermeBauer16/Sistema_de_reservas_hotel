@@ -1,4 +1,4 @@
-# Sistema de resesvas hotel
+# Sistema de reservas hotel
 ## Objetivo 
 
 O objetivo desse projeto foi criar um sistema de reservas de hotel,
